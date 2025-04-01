@@ -72,120 +72,73 @@ fun LemonadeApp(modifier: Modifier = Modifier) {
         modifier = modifier
     ) { innerPadding ->
         Surface(
-            modifier = Modifier.fillMaxSize().padding(innerPadding),
+            modifier = Modifier.fillMaxSize()
+                .padding(innerPadding),
             color = MaterialTheme.colorScheme.background
         )
         {
-            if (currentResult == 1) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
+            when (currentResult) {
+                1 -> LemonTextAndImage(
+                    image = R.drawable.lemon_tree,
+                    text = R.string.one,
+                    contentDescription = R.string.one,
+                    onImageClick = { currentResult = 2 }
                 )
-                {
-                    Image(
-                        painter = painterResource(R.drawable.lemon_tree),
-                        contentDescription = stringResource(R.string.one),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .background(
-                                color = Color.Cyan.copy(alpha = 0.2f),
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .clickable {
-                                currentResult = 2
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Text(
-                        text = stringResource(R.string.one),
-                        fontWeight = FontWeight.Bold
-                    )
 
-                }
-            }
-            if (currentResult == 2) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
+                2 -> LemonTextAndImage(
+                    image = R.drawable.lemon_squeeze,
+                    text = R.string.two,
+                    contentDescription = R.string.two,
+                    onImageClick = { currentResult = 3 }
                 )
-                {
-                    Image(
-                        painter = painterResource(R.drawable.lemon_squeeze),
-                        contentDescription = stringResource(R.string.two),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .background(
-                                color = Color.Cyan.copy(alpha = 0.2f),
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .clickable {
-                                currentResult = 3
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Text(
-                        text = stringResource(R.string.two)
-                    )
 
-                }
-            }
-            if (currentResult == 3) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
+                3 -> LemonTextAndImage(
+                    image = R.drawable.lemon_drink,
+                    text = R.string.three,
+                    contentDescription = R.string.three,
+                    onImageClick = { currentResult = 4 }
                 )
-                {
-                    Image(
-                        painter = painterResource(R.drawable.lemon_drink),
-                        contentDescription = stringResource(R.string.three),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .background(
-                                color = Color.Cyan.copy(alpha = 0.2f),
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .clickable {
-                                currentResult = 4
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Text(
-                        text = stringResource(R.string.three)
-                    )
 
-                }
-            }
-            if (currentResult == 4) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxSize()
+                4 -> LemonTextAndImage(
+                    image = R.drawable.lemon_restart,
+                    text = R.string.four,
+                    contentDescription = R.string.four,
+                    onImageClick = { currentResult = 1 }
                 )
-                {
-                    Image(
-                        painter = painterResource(R.drawable.lemon_restart),
-                        contentDescription = stringResource(R.string.four),
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .background(
-                                color = Color.Cyan.copy(alpha = 0.2f),
-                                shape = RoundedCornerShape(16.dp)
-                            )
-                            .clickable {
-                                currentResult = 1
-                            }
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                    Text(
-                        text = stringResource(R.string.four)
-                    )
-
-                }
             }
         }
+    }
+}
+
+@Composable
+fun LemonTextAndImage(
+    image: Int,
+    text: Int,
+    contentDescription: Int,
+    onImageClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
+    ){
+        Image(
+            painter = painterResource(image),
+            contentDescription = stringResource(contentDescription),
+            modifier = Modifier
+                .wrapContentSize()
+                .background(
+                    color = Color.Cyan.copy(alpha = 0.2f),
+                    shape = RoundedCornerShape(16.dp),
+                    )
+                .clickable{ onImageClick() }
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Text(
+            text = stringResource(text)
+        )
     }
 }
 
